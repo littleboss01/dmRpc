@@ -17,6 +17,7 @@
 #include "DmRpcImpl.h"
 
 #include "dmObjHelp.h"
+#include "config.hpp"
 
 using namespace dmsoftRpc;
 
@@ -103,14 +104,19 @@ void signalHandler(int signum) {
 
 int main()
 {
+	//读取配置文件
+	auto [isok, ip, port, DmPath, regDllPath, regCode, regVer]= readConfigFile();
+
+
 	std::cout << "DmReg.dll和dm5.dll放到c盘根目录" << std::endl;
-	dmObjHelp::regDll("c:\\dm5.dll");
+	std::cout << "release编译的时候需要在连接器-输入-依赖,填写,Crypt32.lib,静态使用mfc和c++-代码生成-运行库 设置mt" << std::endl;
+	dmObjHelp::regDll(DmPath);
 
 	auto dm1 = dmsoft();
 	std::wcout << dm1.Ver() << std::endl;
 
-	std::thread t1([]() {
-		std::string server_address("127.0.0.1:50051");
+	std::thread t1([&]() {
+		std::string server_address( ip + string( ":") + port);
 		DmRpcImpl service;
 		grpc::ServerBuilder builder;
 		builder.AddListeningPort(server_address, grpc::InsecureServerCredentials());
@@ -126,7 +132,7 @@ int main()
 	if (0) {
 		t1.detach();
 		//启动rpc客户端
-		std::string server_address("127.0.0.1:50051");
+		std::string server_address(ip + string(":") + port);
 		DmRpcClient client(grpc::CreateChannel(server_address, grpc::InsecureChannelCredentials()));
 		std::cout << client.GetDmIndex() << std::endl;
 		client.ReturnDmIndex(0);

@@ -148,6 +148,7 @@
     <None Include="dmsoft.proto" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="config.hpp" />
     <ClInclude Include="dmObj.h" />
     <ClInclude Include="dmObjHelp.h" />
     <ClInclude Include="DmRpcImpl.h" />
