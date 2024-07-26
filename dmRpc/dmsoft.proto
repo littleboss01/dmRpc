@@ -1,0 +1,222 @@
+﻿syntax = "proto3";
+
+package dmsoftRpc;
+
+
+
+service dmsoftService{
+	rpc GetDmIndex() returns (GetDmIndexResponse) {}
+	//归还dm
+	rpc ReturnDmIndex(IndexRequest) returns (IsOkResponse) {}
+
+	rpc Ver(IndexRequest) returns (VerResponse) {}
+	//long GetCursorPos(x,y)
+	rpc GetCursorPos (IndexRequest) returns (PointResponse) {}
+	//long KeyDown(vk_code)
+	rpc KeyDown (KeyDownRequest) returns (IsOkResponse) {}
+	//long KeyDownChar(key_str)
+	rpc KeyDownChar (KeyDownCharRequest) returns (IsOkResponse) {}
+	//long KeyPress(vk_code)
+	rpc KeyPress (KeyPressRequest) returns (IsOkResponse) {}
+	//long KeyUp(vk_code)
+	rpc KeyUp (KeyUpRequest) returns (IsOkResponse) {}
+	//long LeftClick()
+	rpc LeftClick (IndexRequest) returns (IsOkResponse) {}
+	//long LeftDoubleClick()
+	rpc LeftDoubleClick (IndexRequest) returns (IsOkResponse) {}
+	//long LeftDown()
+	rpc LeftDown (IndexRequest) returns (IsOkResponse) {}
+	//long LeftUp()
+	rpc LeftUp (IndexRequest) returns (IsOkResponse) {}
+	//long MoveR(rx,ry)
+	rpc MoveR (PointRequest) returns (IsOkResponse) {}
+	//long MoveTo(x,y)
+	rpc MoveTo (PointRequest) returns (IsOkResponse) {}
+	//string MoveToEx(x,y,w,h)
+	rpc MoveToEx (RectRequest) returns (StringResponse) {}
+	//long RightClick()
+	rpc RightClick (IndexRequest) returns (IsOkResponse) {}
+	//long RightDown()
+	rpc RightDown (IndexRequest) returns (IsOkResponse) {}
+	//long RightUp()
+	rpc RightUp (IndexRequest) returns (IsOkResponse) {}
+	//long FindMulColor(x1, y1, x2, y2, color, sim)
+	rpc FindMulColor (FindMultiColorRequest) returns (IsOkResponse) {}
+	//long FindMultiColor(x1, y1, x2, y2,first_color,offset_color,sim, dir,int32X,int32Y)
+	rpc FindMultiColor (FindMultiColorExRequest) returns (FindMultiColorResponse) {}
+	//long FindPic(x1, y1, x2, y2, pic_name, delta_color,sim, dir,int32X, int32Y)
+	rpc FindPic (FindPicRequest) returns (IsOkResponse) {}
+	//string GetColor(x,y)
+	rpc GetColor (PointRequest) returns (StringResponse) {}
+	//long Reg(reg_code,ver_info)
+	rpc Reg (RegRequest) returns (IsOkResponse) {}
+	//long SetPath(path)
+	rpc SetPath (StringRequest) returns (IsOkResponse) {}
+	//long BindWindowEx(hwnd,display,mouse,keypad,public,mode)
+	rpc BindWindowEx (BindWindowExRequest) returns (IsOkResponse) {}
+	//long DownCpu(type,rate)
+	rpc DownCpu (DownCpuRequest) returns (IsOkResponse) {}
+	//long EnableBind(enable)
+	rpc EnableBind (EnableBindRequest) returns (IsOkResponse) {}
+	//long IsBind(hwnd)
+	rpc IsBind (IsBindRequest) returns (IsOkResponse) {}
+	//long LockInput(lock)
+	rpc LockInput (LockRequest) returns (IsOkResponse) {}
+	//long UnBindWindow()
+	rpc UnBindWindow (IndexRequest) returns (IsOkResponse) {}
+	//long MoveWindow(hwnd,x,y) 
+	rpc MoveWindow (MoveWindowRequest) returns (IsOkResponse) {}
+	//long SetClientSize(hwnd,width,height) 
+	rpc SetClientSize (SetClientSizeRequest) returns (IsOkResponse) {}
+	//long SetWindowSize(hwnd,width,height) 
+	rpc SetWindowSize (SetWindowSizeRequest) returns (IsOkResponse) {}
+	//long SetWindowText(hwnd,title) 
+	rpc SetWindowText (SetWindowTextRequest) returns (IsOkResponse) {}
+}
+message GetDmIndexResponse{
+	int32 index = 1;
+}
+message SetWindowTextRequest{
+	int32 index = 1;
+	int32 hwnd = 2;
+	string title = 3;}
+message SetWindowSizeRequest{
+	int32 index = 1;
+	int32 hwnd = 2;
+	int32 width = 3;
+	int32 height = 4;}
+message SetClientSizeRequest{
+	int32 index = 1;
+	int32 hwnd = 2;
+	int32 width = 3;
+	int32 height = 4;}
+message MoveWindowRequest{
+	int32 index = 1;
+	int32 hwnd = 2;
+	int32 x = 3;
+	int32 y = 4;}
+message LockRequest{
+	int32 index = 1;
+	int32 lock = 2;}
+message  IsBindRequest{
+	int32 index = 1;
+	int32 hwnd = 2;}
+message EnableBindRequest{
+	int32 index = 1;
+	int32 enable = 2;}
+message DownCpuRequest{
+	int32 index = 1;
+	int32 type = 2;
+	int32 rate = 3;}
+
+message BindWindowExRequest{
+	int32 index = 1;
+	int32 hwnd = 2;
+	string display = 3;
+	string mouse = 4;
+	string keypad = 5;
+	string public_ = 6;
+	int32 mode = 7;
+}
+
+message StringRequest{
+	int32 index = 1;
+	string path = 2;}
+
+message RegRequest{
+	int32 index = 1;
+	string reg_code = 2;
+	string ver_info = 3;}
+
+message FindPicRequest{
+	int32 index = 1;
+	int32 x1 = 2;
+	int32 y1 = 3;
+	int32 x2 = 4;
+	int32 y2 = 5;
+	string pic_name = 6;
+	string delta_color = 7;
+	double sim = 8;
+	int32 dir = 9;
+}
+
+message FindPicResponse{
+	int32 isOk = 1;
+	int32 x = 2;
+	int32 y = 3;}
+
+
+message FindMultiColorExRequest{
+	int32 index = 1;
+	int32 x1 = 2;
+	int32 y1 = 3;
+	int32 x2 = 4;
+	int32 y2 = 5;
+	string first_color = 6;
+	string offset_color = 7;
+	double sim = 8;
+	int32 dir = 9;
+ }
+
+ message FindMultiColorResponse{
+	int32 isOk = 1;
+	int32 x = 2;
+	int32 y = 3;}
+
+message FindMultiColorRequest{
+	int32 index = 1;
+	int32 x1 = 2;
+	int32 y1 = 3;
+	int32 x2 = 4;
+	int32 y2 = 5;
+	string color = 6;
+	double sim = 7;}
+
+message RectRequest{
+	int32 index = 1;
+	int32 x = 2;
+	int32 y = 3;
+	int32 w = 4;
+	int32 h = 5;}
+message StringResponse{
+	string str = 2;}
+
+message PointRequest{
+	int32 index = 1;
+	int32 x = 2;
+	int32 y = 3;}
+message PointResponse{
+	int32 x = 1;
+	int32 y = 2;}
+
+//通用的只有一个index的请求
+message IndexRequest{
+	int32 index = 1;}
+//通用的只有一个isOk的返回
+message IsOkResponse{
+	int32 isOk = 1;}
+
+ 
+ 
+message KeyUpRequest{
+	int32 index = 1;
+	int32 vk_code = 2;}
+ 
+message VerResponse{
+	string version = 2;}
+ 
+ 
+
+message KeyDownRequest{
+	int32 index = 1;
+	int32 vk_code = 2;} 
+
+message KeyDownCharRequest{
+	int32 index = 1;
+	string key_str = 2;} 
+
+message KeyPressRequest{
+	int32 index = 1;
+	int32 vk_code = 2;}
+ 
+
